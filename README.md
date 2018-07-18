@@ -15,8 +15,11 @@ Project demo for Coursera JHU Data Science's sub-setting a clean data set from a
 1. ### run_analysis.R
 	R script for merging, extracting from, cleaning and processing the original dataset
 
-2. ### codebook_a.Rmd, codebook.md
-	Contains extracted features descriptions and information.
+2. ### codebook_.Rmd
+	Contains a dynamic, R-generated extracted features descriptions and information
+
+3. ### codebook.md (extra)
+	Contains a static hard-coded codebook with other textual descriptions and information
 
 3. ### new_data.csv
 	The new course tidy clean dataset extracted and processed from the original in CSV format
