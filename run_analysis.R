@@ -384,6 +384,9 @@ run_analysis <- function(){
 
 a <- run_analysis()
 
-# Write to csv
+# Write to text file
 a <- a[,-1]
 write.table(a, file="new_data.txt", row.name=TRUE)
+
+# Extra: write to csv file
+write.csv(a, file="new_data.csv")
