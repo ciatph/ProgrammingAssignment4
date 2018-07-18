@@ -1,6 +1,6 @@
 ## CodeBook for the extracted tidy data set
 
-##Data Source
+## Data Source
 The dataset used for this project represent data collected from the accelerometers from the Samsung Galaxy S smartphone.
 
 Experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, a 3-axial linear acceleration and 3-axial angular velocity were captured at a constant rate of 50Hz. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the _training_ data and 30% the _test_ data. 
@@ -9,25 +9,23 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 
 The original dataset was from the Coursera's **Getting and Cleaning Data Course Project** source: [Human Activity Recognition Using Smartphones](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
-The filtered dataset for the course project is in this [link]().
+The filtered dataset for the course project is in this [link](https://github.com/ciatph/ProgrammingAssignment4/new_data.csv).
 
 
-##Feature Selection
+## Feature Selection
 
 Data in the new tidy data set are as specified from the course project:
 
-1. Innertial data merged with the training and test data sets, which are then merged into (1) master data set, which are then,
+1. Innertial data merged with the training and test data sets, which are then merged into (1) master data set, and then,
 2. Extracted with only columns that are _means_ and _standard deviations_ for each measurement
 3. Appended with descriptive activity names.
 4. Appended with appropriate column headers (labels)
 
-The average of each measurement mentioned above was derived for each user's activities.
-
-The new tidy data set now contains only the features that are _means_ "means()" and _standard deviations_ "std()", sub-setted from the original features list. 
+The new tidy data set now contains the average of only the features that are _means_ "means()" and _standard deviations_ "std()", sub-setted from the original features list, grouped for each user's activities.
 
 Please refer to the original dataset's README for the original data set for the complete list and descriptions of features. 
 
-###All variables that are "means()"
+### All variables that are "means()"
 
 - activity\_id\_mean
 - subject\_id\_mean
@@ -67,7 +65,7 @@ Please refer to the original dataset's README for the original data set for the 
 - fBodyBodyGyroJerkMag-mean()
 
 
-###All variables that are standard deviations "std()"
+### All variables that are standard deviations "std()"
 
 - activity\_id\_std
 - subject\_id\_std
@@ -106,5 +104,8 @@ Please refer to the original dataset's README for the original data set for the 
 - tBodyBodyGyroMag-std()
 - tBodyBodyGyroJerkMag-std()
 
-##Running the script
-1. Extract the original dataset into the "./data/programming_assignment/" directory.
+## Running the script
+1. Set RStudio's working directory to "./ProgrammingAssignment4"
+2. Extract the original [dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) into the "./ProgrammingAssignment4/data/"
+2. In the command line, type: `source("run_analysis.R")`
+3. Wait for the extracted tidy data to be generated (new_data.csv).

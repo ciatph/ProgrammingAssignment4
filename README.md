@@ -6,6 +6,7 @@ Project demo for Coursera JHU Data Science's sub-setting a clean data set from a
 
 ## Usage
 1. Set RStudio's working directory to "./ProgrammingAssignment4"
+2. Extract the original [dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) into the "./ProgrammingAssignment4/data/"
 2. In the command line, type: `source("run_analysis.R")`
 3. Wait for the extracted tidy data to be generated (new_data.csv).
 
