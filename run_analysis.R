@@ -382,11 +382,16 @@ run_analysis <- function(){
   }
 }
 
-a <- run_analysis()
+extracted_data <- run_analysis()
 
 # Write to text file
-a <- a[,-1]
-write.table(a, file="new_data.txt", row.name=TRUE)
+extracted_data <- extracted_data[,-1]
+write.table(extracted_data, file="new_data.txt", row.name=TRUE)
 
 # Extra: write to csv file
-write.csv(a, file="new_data.csv")
+write.csv(extracted_data, file="new_data.csv")
+
+# Make an R-generated code book
+# Please make sure the "dataMaid" package has been installed
+library(dataMaid)
+makeCodebook(extracted_data)
