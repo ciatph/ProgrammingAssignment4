@@ -24,5 +24,5 @@ Project demo for Coursera JHU Data Science's sub-setting a clean data set from a
 	Should contain the "UCI HAR Dataset" directory, from the original course test data set. Link [here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip).
 
 
-##Notes
+## Notes
 Please view _codebook.md_ for more information about the generated data and other relevant dataset information.
