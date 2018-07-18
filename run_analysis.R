@@ -1,7 +1,9 @@
+projDir <- './data/UCI HAR Dataset/'
+
 ## Load text file data 
 ## Return as a data.frame
 loadData <- function(filename, path=NULL){
-  file_path = './data/programming_assignment/'
+  file_path = projDir
   
   if(!is.null(path))
     file_path = path
@@ -182,18 +184,24 @@ createNewDataSet <- function(data, activity_labels){
 ## Creates an R object for data analysis
 ## Loads data sets and associated methods
 load_analysis <- function(){
+	# Check if data directory exists
+	if(!dir.exists(projDir)){
+		print("Please download and place the 'UCI HAR Dataset' inside './data'")
+		return (0)
+	}
+		
   # Load column variables
   features <- loadData('features.txt')
   activity_labels <- loadData('activity_labels.txt')
   
   # Load data for train
-  directory <- './data/programming_assignment/train/'
+  directory <- paste0(projDir, 'train/')
   train_x <- loadData('X_train.txt', directory)
   train_y <- loadData('Y_train.txt', directory)
   train_subject <- loadData('subject_train.txt', directory)
   
   # Load data for test
-  directory <- './data/programming_assignment/test/'
+  directory <- paste0(projDir, 'test/')
   test_x <- loadData('X_test.txt', directory)
   test_y <- loadData('Y_test.txt', directory)
   test_subject <- loadData('subject_test.txt', directory)
@@ -297,7 +305,7 @@ appendPrefix <- function(x, prefix){
 ## Appends all data found in /Innertial Signals into (1) data frame
 ## @param datasetdir: train|test
 getInnertialData <- function(datasetdir){
-  directory <- paste0("./data/programming_assignment/", datasetdir, "/Inertial Signals/")
+  directory <- paste0(projDir, datasetdir, "/Inertial Signals/")
   f <- data.frame()
   
   filenames_acc <- c("body_acc_x_*.txt", "body_acc_y_*.txt", "body_acc_z_*.txt",
@@ -331,47 +339,51 @@ getInnertialData <- function(datasetdir){
 
 
 ## Main program proper
-start_analysis <- function(){
+run_analysis <- function(){
   # Load data
   # Append descriptive activity labels, numeric activity id and subject id
   d <- load_analysis();
   
-  #1. Merge data sets
-  #1a. Merge/Append column-wise Innertial Signals data to training and test data sets
-  d$mergedata("train", getInnertialData("train"))
-  d$mergedata("test", getInnertialData("test"))
-  
-  # 1b. Merge the training and test sets to create (1) data set
-  mdata <- d$mergeDataSet();
-  
-  #2. Extract only the measurements on the combined mean and standard deviation for each measurement.
-  means_list <- d$getAllMeans(mdata, "mean");
-  std_list <- d$getAllStd(mdata, "std");
-  
-  names(means_list)
-  names(std_list[1])  
-  
-  # Merge the "means()" and "std()" -only training and test sets to create (1) data set
-  # Bind all means and std data column-wise
-  ms_data <- cbind(means_list, std_list)  
-  
-  #3. Use descriptive activity names to name the activities in the data set:
-  # See getColumnData(): 
-  #   a. Append the training descriptive activity labels per row
-  
-  #4. Appropriately labels the data set with descriptive variable names.
-  # See getCOlumnData() parts:
-  #   a. Append the descriptive column headers per column/variable
-  
-  names(ms_data)
+  # Check if the Samsung dataset is present before proceeding
+  if(class(d) == "list"){
+	  
+	  #1. Merge data sets
+	  #1a. Merge/Append column-wise Innertial Signals data to training and test data sets
+	  d$mergedata("train", getInnertialData("train"))
+	  d$mergedata("test", getInnertialData("test"))
+	  
+	  # 1b. Merge the training and test sets to create (1) data set
+	  mdata <- d$mergeDataSet();
+	  
+	  #2. Extract only the measurements on the combined mean and standard deviation for each measurement.
+	  means_list <- d$getAllMeans(mdata, "mean");
+	  std_list <- d$getAllStd(mdata, "std");
+	  
+	  names(means_list)
+	  names(std_list[1])  
+	  
+	  # Merge the "means()" and "std()" -only training and test sets to create (1) data set
+	  # Bind all means and std data column-wise
+	  ms_data <- cbind(means_list, std_list)  
+	  
+	  #3. Use descriptive activity names to name the activities in the data set:
+	  # See getColumnData(): 
+	  #   a. Append the training descriptive activity labels per row
+	  
+	  #4. Appropriately labels the data set with descriptive variable names.
+	  # See getCOlumnData() parts:
+	  #   a. Append the descriptive column headers per column/variable
+	  
+	  names(ms_data)
 
-  #5.From the data set in step 4, creates a second, independent tidy data set 
-  # with the average of each variable for each activity and each subject.
-  return (createNewDataSet(ms_data, d$activity_labels))
+	  #5.From the data set in step 4, creates a second, independent tidy data set 
+	  # with the average of each variable for each activity and each subject.
+	  return (createNewDataSet(ms_data, d$activity_labels))
+  }
 }
 
-a <- start_analysis()
+a <- run_analysis()
 
 # Write to csv
 a <- a[,-1]
-write.csv(a, "new_data.csv")
+write.table(a, file="new_data.txt", row.name=TRUE)
